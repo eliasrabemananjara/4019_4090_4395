@@ -9,7 +9,7 @@ class UserRepository
 
   public function findById($id)
   {
-    $st = $this->pdo->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
+    $st = $this->pdo->prepare("SELECT * FROM users WHERE iduser = ? LIMIT 1");
     $st->execute([(int)$id]);
     return $st->fetch(PDO::FETCH_ASSOC);
   }
