@@ -48,7 +48,7 @@ CREATE TABLE dons (
     quantite INT NOT NULL,
     idproduit INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (iduser) REFERENCES users(id),
+    FOREIGN KEY (iduser) REFERENCES users(iduser),
     FOREIGN KEY (idproduit) REFERENCES produit(idproduit)
 );
 
