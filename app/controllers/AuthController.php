@@ -1,4 +1,9 @@
 <?php
+
+require_once __DIR__ . '/../repositories/StockRepository.php';
+require_once __DIR__ . '/../repositories/VilleRepository.php';
+require_once __DIR__ . '/../repositories/AttributionRepository.php';
+
 class AuthController
 {
 
@@ -53,6 +58,39 @@ class AuthController
 
   public static function showAccueil()
   {
-    Flight::render('auth/accueil');
+    if (isset($_GET['quantite']) && isset($_GET['idproduit']) && isset($_GET['idville']) && isset($_GET['idstock'])) {
+      $pdo  = Flight::db();
+      $repo = new AttributionRepository($pdo);
+      $repo->create($_GET['quantite'], $_GET['idproduit'], $_GET['idville']); 
+      $repo2 = new StockRepository($pdo);
+      $repo2->decreaseQuantite($_GET['quantite'], $_GET['idproduit'], $_GET['idstock']);
+      Flight::render('auth/accueil');
+    }
+    else {
+      Flight::render('auth/accueil');
+    }
+  }
+
+    public static function showAttribution()
+    {
+    $pdo  = Flight::db();
+    $repo = new StockRepository($pdo);
+    $stocks = $repo->findAll();
+    Flight::render('auth/attribution', [
+      'stocks' => $stocks
+    ]);
+  }
+
+  public static function showAttributionForm()
+  {
+    $pdo  = Flight::db();
+    $repo = new VilleRepository($pdo);
+    $idproduit = $_GET['idproduit'] ?? null;
+    $villes = $repo->findByProduit($idproduit);
+    Flight::render('auth/attribFrom', [
+      'villes' => $villes,
+      'idproduit' => $idproduit,
+      'idstock' => $_GET['idstock'] ?? null
+    ]);
   }
 }

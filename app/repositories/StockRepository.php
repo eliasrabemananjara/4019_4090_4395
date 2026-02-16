@@ -53,6 +53,12 @@ class StockRepository
         return $st->execute([(int)$idproduit, (int)$quantite, (int)$id]);
     }
 
+    public function decreaseQuantite($quantite, $idproduit, $idstock)
+    {
+        $st = $this->pdo->prepare("UPDATE stock SET quantite = quantite - ? WHERE idproduit = ? AND idstock = ?");
+        return $st->execute([(int)$quantite, (int)$idproduit, (int)$idstock]);
+    }
+
     public function delete($id)
     {
         $st = $this->pdo->prepare("DELETE FROM stock WHERE idstock = ?");

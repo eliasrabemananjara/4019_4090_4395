@@ -30,6 +30,17 @@ class VilleRepository
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findByProduit($idproduit)
+    {
+        $st = $this->pdo->prepare(
+            "SELECT v.*, b.quantite, b.created_at FROM ville v 
+            INNER JOIN besoin b ON v.idville = b.id_ville 
+            WHERE b.idproduit = ?"
+        );
+        $st->execute([(int)$idproduit]);
+        return $st->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function create($nom_ville, $idregion)
     {
         $st = $this->pdo->prepare("INSERT INTO ville(nom_ville, idregion) VALUES(?, ?)");
