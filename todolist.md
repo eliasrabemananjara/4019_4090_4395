@@ -34,3 +34,9 @@
         -Besoins Total
         -Dons Attribués
         -Reste
+
+Apres le login, on redirigera vers la page accueil.php
+    -Au aura des liens pour la page insertion des besoins
+    -Au aura des liens pour la page insertion des dons
+    -Au aura des liens pour la page attribution des dons
+    -Au aura des liens pour la page listes des besoins

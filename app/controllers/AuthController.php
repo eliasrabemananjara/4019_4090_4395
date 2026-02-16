@@ -36,8 +36,8 @@ class AuthController
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_email'] = $user['email'];
 
-        // Rediriger vers la page messages
-        Flight::redirect('/messages');
+        // Rediriger vers la page d'accueil
+        Flight::redirect('/accueil');
         return;
       } catch (Exception $e) {
         $res['errors']['email'] = "Une erreur est survenue lors de la connexion.";
@@ -49,5 +49,10 @@ class AuthController
       'errors' => $res['errors'],
       'success' => false
     ]);
+  }
+
+  public static function showAccueil()
+  {
+    Flight::render('auth/accueil');
   }
 }
