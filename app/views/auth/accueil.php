@@ -9,8 +9,8 @@
 
 <body>
     <h1>Accueil</h1>
-    <a href="/besoins">Insertion des besoins</a>
-    <a href="/dons">Insertion des dons</a>
+    <a href="/insertBesoins">Insertion des besoins</a>
+    <a href="/insertDons">Insertion des dons</a>
     <a href="/attribution">Attribution des dons</a>
     <a href="/listesbesoins">Liste des besoins</a>
     <a href="/logout">Deconnexion</a>
