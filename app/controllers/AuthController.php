@@ -38,7 +38,7 @@ class AuthController
         $user = $svc->findOrCreateUser($res['values']['email']);
 
         // Stocker les informations en session
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['iduser'];
         $_SESSION['user_email'] = $user['email'];
 
         // Rediriger vers la page d'accueil
