@@ -102,6 +102,6 @@ CREATE TABLE prix_unitaires (
 
 INSERT INTO prix_unitaires (idproduit, valeur) VALUES 
 (1, 1000),
-(1, 500),
-(2, 300),
-(2, 100);
+(2, 500),
+(3, 300),
+(4, 100);

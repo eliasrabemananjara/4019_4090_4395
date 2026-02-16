@@ -1,7 +1,4 @@
 <?php
-
-namespace App\Repositories;
-
 class Prix_unitaireRepository
 {
     private $pdo;

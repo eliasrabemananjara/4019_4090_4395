@@ -73,7 +73,6 @@ class StockRepository
 
     public function removeStock($idproduit, $quantite)
     {
-        // Helper method to remove stock quantity (negative value)
         return $this->create($idproduit, -$quantite);
     }
 

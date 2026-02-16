@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../repositories/Prix_unitaireRepository.php';
+
 class ListeBesoinController
 {
 
@@ -128,6 +130,65 @@ class ListeBesoinController
             }
         } else {
             $_SESSION['error'] = "Stock insuffisant. Disponible : $currentStock, Demandé : $quantite.";
+        }
+
+        Flight::redirect('/listesbesoins');
+    }
+
+    public static function acheter()
+    {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            Flight::redirect('/login');
+            return;
+        }
+
+        $id_ville = Flight::request()->data->id_ville;
+        $idproduit = Flight::request()->data->idproduit;
+        $quantite = Flight::request()->data->quantite;
+
+        if (empty($id_ville) || empty($idproduit) || empty($quantite) || $quantite <= 0) {
+            $_SESSION['error'] = "Veuillez remplir correctement tous les champs.";
+            Flight::redirect('/listesbesoins');
+            return;
+        }
+
+        $pdo = Flight::db();
+        $stockRepo = new StockRepository($pdo);
+        $attributionRepo = new AttributionRepository($pdo);
+        $prixRepo = new Prix_unitaireRepository($pdo);
+
+        $prixUnitaire = 0;
+        $prixs = $prixRepo->getAllPrixUnitaires();
+        foreach ($prixs as $prix) {
+            if ($prix['idproduit'] == $idproduit) {
+                $prixUnitaire = $prix['valeur'];
+                break;
+            }
+        }
+
+        if ($prixUnitaire <= 0) {
+            $_SESSION['error'] = "Prix unitaire non défini pour ce produit.";
+            Flight::redirect('/listesbesoins');
+            return;
+        }
+
+        $montantTotal = $quantite * $prixUnitaire;
+
+
+        try {
+            $pdo->beginTransaction();
+            
+
+            $attributionRepo->removeAttribution($montantTotal, 5, $id_ville);
+
+            $attributionRepo->create($quantite, $idproduit, $id_ville);
+
+            $pdo->commit();
+            $_SESSION['success'] = "Achat de $quantite unités effectué avec succès pour un montant de $montantTotal.";
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            $_SESSION['error'] = "Une erreur est survenue lors de l'achat : " . $e->getMessage();
         }
 
         Flight::redirect('/listesbesoins');

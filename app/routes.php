@@ -27,3 +27,4 @@ Flight::route('GET /insertDons', ['DonsController', 'showInsert']);
 Flight::route('POST /insertDons', ['DonsController', 'postInsert']);
 Flight::route('GET /listesbesoins', ['ListeBesoinController', 'listeBesoin']);
 Flight::route('POST /attribuer', ['ListeBesoinController', 'attribuer']);
+Flight::route('POST /acheter', ['ListeBesoinController', 'acheter']);

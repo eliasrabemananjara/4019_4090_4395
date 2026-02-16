@@ -208,7 +208,7 @@
             padding: 15px 20px;
             background: #f8f9fa;
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 2fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             gap: 15px;
             font-weight: bold;
             font-size: 12px;
@@ -314,6 +314,7 @@
                                 <div>Attribuée</div>
                                 <div>Reste</div>
                                 <div>Attribution</div>
+                                <div>Achat</div>
                             </div>
 
                             <?php foreach ($section['besoins'] as $besoin): ?>
@@ -355,6 +356,14 @@
                                                 <button type="submit" class="btn btn-sm btn-primary">Attribuer</button>
                                             </form>
                                         <?php endif; ?>
+                                    </div>
+                                    <div class="besoin-action">
+                                        <form action="/acheter" method="POST" class="d-flex gap-2">
+                                            <input type="hidden" name="id_ville" value="<?php echo $section['ville']['idville']; ?>">
+                                            <input type="hidden" name="idproduit" value="<?php echo $besoin['idproduit']; ?>">
+                                            <input type="number" name="quantite" class="form-control form-control-sm" placeholder="Qté" style="width: 80px;" required>
+                                            <button type="submit" class="btn btn-sm btn-primary">Acheter</button>
+                                        </form>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
