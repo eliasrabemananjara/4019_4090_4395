@@ -106,6 +106,7 @@ INSERT INTO prix_unitaires (idproduit, valeur) VALUES
 (3, 300),
 (4, 100);
 
+<<<<<<< HEAD
 CREATE TABLE achat (
     idachat INT PRIMARY KEY AUTO_INCREMENT,
     montant INT NOT NULL,
@@ -114,3 +115,5 @@ CREATE TABLE achat (
     FOREIGN KEY (idproduit) REFERENCES produit(idproduit),
     FOREIGN KEY (idville) REFERENCES ville(idville)
 );
+=======
+>>>>>>> e455dab106875e79a89f2a97ecca6bcb62e2b892

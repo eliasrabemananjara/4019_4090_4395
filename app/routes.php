@@ -14,6 +14,8 @@ require_once __DIR__ . '/repositories/ProduitRepository.php';
 require_once __DIR__ . '/repositories/VilleRepository.php';
 require_once __DIR__ . '/repositories/StockRepository.php';
 require_once __DIR__ . '/repositories/AttributionRepository.php';
+require_once __DIR__ . '/repositories/PrixUnitaireRepository.php';
+require_once __DIR__ . '/controllers/recapitControleur.php';
 
 Flight::route('GET /', ['AuthController', 'showLogin']);
 Flight::route('GET /login', ['AuthController', 'showLogin']);
@@ -27,4 +29,5 @@ Flight::route('GET /insertDons', ['DonsController', 'showInsert']);
 Flight::route('POST /insertDons', ['DonsController', 'postInsert']);
 Flight::route('GET /listesbesoins', ['ListeBesoinController', 'listeBesoin']);
 Flight::route('POST /attribuer', ['ListeBesoinController', 'attribuer']);
+Flight::route('GET /recapitulatif', ['RecapitControleur', 'showRecap']);
 Flight::route('POST /acheter', ['ListeBesoinController', 'acheter']);
