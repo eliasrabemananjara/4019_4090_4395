@@ -91,3 +91,16 @@ INSERT INTO produit (nom_produit, idtype_produit) VALUES
 ('Tole', 2),
 ('Clou', 2),
 ('Argent', 3);
+
+CREATE TABLE prix_unitaires (
+    idprix_unitaires INT PRIMARY KEY AUTO_INCREMENT,
+    idproduit INT NOT NULL,
+    valeur INT NOT NULL,
+    FOREIGN KEY (idproduit) REFERENCES produit(idproduit)
+);
+
+INSERT INTO prix_unitaires (idproduit, valeur) VALUES 
+(1, 1000),
+(1, 500),
+(2, 300),
+(2, 100);
