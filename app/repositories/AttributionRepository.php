@@ -95,4 +95,9 @@ class AttributionRepository
         $st->execute([(int)$idregion]);
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function removeAttribution($quantite, $idproduit, $id_ville)
+    {
+        return $this->create(-$quantite, $idproduit, $id_ville);
+    }
 }
