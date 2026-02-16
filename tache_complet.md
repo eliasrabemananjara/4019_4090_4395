@@ -1,0 +1,66 @@
+-Creation de base de donnees et configuration
+    -[ok][4019]Script table.sql (users, region, ville, type_produit, produit, besoin, dons, stock, attribution)
+    -[ok][4019]Script donnees.sql (Insertion des donnees de test)
+    -[ok][4019]Configuration de la connexion PDO
+
+-Authentification
+    -[ok][4090]Creation page login
+        -[ok][4090]Formulaire de connexion (email)
+        -[ok][4090]Traitement "Auto-login" (creation compte auto si nouveau)
+        -[ok][4090]Gestion de session utilisateur
+    -[ok][4090]Creation page d'accueil
+        -[ok][4090]Liens vers les fonctionalites (Insertions, Listes)
+
+-Gestion des Besoins
+    -[ok][4019]Creation page insertion des besoins
+        -[ok][4019]Formulaire avec ville (liste deroulante)
+        -[ok][4019]Selection du produit (liste deroulante)
+        -[ok][4019]Saisie quantite
+        -[ok][4019]Bouton valider
+    -[ok][4019]Traitement insertion besoin
+        -[ok][4019]Enregistrement dans la table besoin
+
+-Gestion des Dons
+    -[ok][4019]Creation page insertion des dons
+        -[ok][4019]Formulaire selection produit
+        -[ok][4019]Saisie quantite du don
+        -[ok][4019]Bouton valider
+    -[ok][4019]Traitement insertion don
+        -[ok][4019]Enregistrement de l'historique dans table dons
+        -[ok][4019]Mise a jour du stock (ajout quantite ou nouvelle ligne)
+
+-Visualisation et Attribution (Liste des Besoins)
+    -[ok][4090]Creation page liste des besoins
+        -[ok][4090]Affichage groupe par ville
+        -[ok][4090]Tableau recapitulant les besoins
+            -[ok][4090]Colonne Produit
+            -[ok][4090]Colonne Stock Disponible (dynamique)
+            -[ok][4090]Colonne Quantite Demandee
+            -[ok][4090]Colonne Quantite Attribuee
+            -[ok][4090]Colonne Reste a couvrir
+            -[ok][4090]Colonne Action (Attribution)
+    -Interface d'attribution integree
+        -[ok][4395]Formulaire direct sur la ligne du besoin
+        -[ok][4395]Champs quantite a attribuer (limite au min(stock, reste))
+        -[ok][4395]Bouton Attribuer
+        -[ok][4395]Affichage badges "Complet" ou "Rupture de Stock" si attribution impossible
+    -Traitement de l'attribution
+        -[ok][4395]Verification du stock disponible en backend
+        -[ok][4395]Transaction atomique
+            -[ok][4395]Decrementer le stock (stock = stock - quantite)
+            -[ok][4395]Inserer l'attribution
+        -[ok][4395]Message succes ou erreur
+
+-Gestion des Prix et Achats (Dons Argent)
+    -Ajout des prix unitaires qui ne changent pas pour les besoins (nature/materiaux)
+    -Page d'achat de besoins (Conversion Dons Argent -> Besoins)
+        -Liste des achats a faire filtrable par Ville
+        -Saisie des achats en utilisant les prix unitaires
+        -Tableau recpaitulatif des montants d'achat par ville
+
+-Recapitulation Financiere (Tableau de Bord Global)
+    -Creation page de recapitulation avec bouton "Actualiser" (Ajax)
+        -Affichage Montant Total des Besoins
+        -Affichage Montant Total des Besoins Satisfaits
+        -Affichage Montant Total des Dons Recus
+        -Affichage Montant Total des Dons Dispatches
