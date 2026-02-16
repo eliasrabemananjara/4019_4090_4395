@@ -18,6 +18,7 @@ class ListeBesoinController
         $villeRepo = new VilleRepository($pdo);
         $besoinRepo = new BesoinRepository($pdo);
         $attributionRepo = new AttributionRepository($pdo);
+        $stockRepo = new StockRepository($pdo);
 
         // Récupérer toutes les villes
         $villes = $villeRepo->findAll();
@@ -54,6 +55,10 @@ class ListeBesoinController
                 $besoin['quantite_attribuee'] = $quantiteAttribuee;
                 $besoin['reste'] = max(0, $reste); // Eviter les nombres négatifs
 
+                // Récupérer le stock actuel pour le produit
+                $currentStock = $stockRepo->getCurrentStock($idproduit);
+                $besoin['stock_disponible'] = $currentStock;
+
                 $besoinsAvecReste[] = $besoin;
             }
 
@@ -67,8 +72,64 @@ class ListeBesoinController
 
         // Afficher la vue avec les données
         Flight::render('auth/liste_besoin', [
-            'donnees' => $donnees
+            'donnees' => $donnees,
+            'success' => $_SESSION['success'] ?? null,
+            'error' => $_SESSION['error'] ?? null
         ]);
+
+        // Clean up session messages
+        unset($_SESSION['success']);
+        unset($_SESSION['error']);
+    }
+
+    public static function attribuer()
+    {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            Flight::redirect('/login');
+            return;
+        }
+
+        $id_ville = Flight::request()->data->id_ville;
+        $idproduit = Flight::request()->data->idproduit;
+        $quantite = Flight::request()->data->quantite;
+
+        if (empty($id_ville) || empty($idproduit) || empty($quantite) || $quantite <= 0) {
+            $_SESSION['error'] = "Veuillez remplir correctement tous les champs.";
+            Flight::redirect('/listesbesoins');
+            return;
+        }
+
+        $pdo = Flight::db();
+        $stockRepo = new StockRepository($pdo);
+        $attributionRepo = new AttributionRepository($pdo);
+
+        // Vérifier le stock
+        $currentStock = $stockRepo->getCurrentStock($idproduit);
+
+        if ($currentStock >= $quantite) {
+            try {
+                // Début de la transaction
+                $pdo->beginTransaction();
+
+                // 1. Décrémenter le stock (ajouter une ligne négative ou update selon implémentation, ici on utilise removeStock qui ajoute une ligne négative)
+                // Mais attendez, StockRepository::removeStock ajoute une ligne avec quantité négative. 
+                // Assurons-nous que c'est bien ce qu'on veut.
+                $stockRepo->removeStock($idproduit, $quantite);
+
+                // 2. Créer l'attribution
+                $attributionRepo->create($quantite, $idproduit, $id_ville);
+
+                $pdo->commit();
+                $_SESSION['success'] = "Attribution de $quantite unités effectuée avec succès.";
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                $_SESSION['error'] = "Une erreur est survenue lors de l'attribution : " . $e->getMessage();
+            }
+        } else {
+            $_SESSION['error'] = "Stock insuffisant. Disponible : $currentStock, Demandé : $quantite.";
+        }
+
+        Flight::redirect('/listesbesoins');
     }
 }
-?>

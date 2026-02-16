@@ -19,8 +19,6 @@ Flight::route('GET /', ['AuthController', 'showLogin']);
 Flight::route('GET /login', ['AuthController', 'showLogin']);
 Flight::route('POST /login', ['AuthController', 'postLogin']);
 Flight::route('GET /accueil', ['AuthController', 'showAccueil']);
-Flight::route('GET /attribution', ['AuthController', 'showAttribution']);
-Flight::route('GET /attribForm', ['AuthController', 'showAttributionForm']);
 
 Flight::route('GET /insertBesoins', ['BesoinController', 'showInsert']);
 Flight::route('POST /insertBesoins', ['BesoinController', 'postInsert']);
@@ -28,3 +26,4 @@ Flight::route('POST /insertBesoins', ['BesoinController', 'postInsert']);
 Flight::route('GET /insertDons', ['DonsController', 'showInsert']);
 Flight::route('POST /insertDons', ['DonsController', 'postInsert']);
 Flight::route('GET /listesbesoins', ['ListeBesoinController', 'listeBesoin']);
+Flight::route('POST /attribuer', ['ListeBesoinController', 'attribuer']);
