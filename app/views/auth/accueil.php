@@ -75,6 +75,15 @@
                 <span class="btn btn-sm btn-outline mt-auto w-100">Accéder</span>
             </a>
 
+            <a href="/vente" class="card stat-card" style="text-decoration: none; border-left: 4px solid var(--color-danger);">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="bi bi-cart4 text-danger" style="font-size: 1.5rem;"></i>
+                    <h3 class="h5 mb-0 text-dark">Vente de Stock</h3>
+                </div>
+                <p class="text-muted text-sm">Vendre des produits en stock.</p>
+                <span class="btn btn-sm btn-outline mt-auto w-100">Accéder</span>
+            </a>
+
             <a href="/historiqueAchat" class="card stat-card" style="text-decoration: none; border-left: 4px solid var(--color-info);">
                 <div class="d-flex align-items-center gap-2 mb-3">
                     <i class="bi bi-cart-check text-info" style="font-size: 1.5rem;"></i>

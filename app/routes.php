@@ -17,12 +17,16 @@ require_once __DIR__ . '/repositories/AttributionRepository.php';
 require_once __DIR__ . '/repositories/PrixUnitaireRepository.php';
 require_once __DIR__ . '/controllers/recapitControleur.php';
 require_once __DIR__ . '/controllers/HistoriqueAchatController.php';
+require_once __DIR__ . '/controllers/VenteController.php';
 
 Flight::route('GET /', ['AuthController', 'showLogin']);
 Flight::route('GET /login', ['AuthController', 'showLogin']);
 Flight::route('POST /login', ['AuthController', 'postLogin']);
 Flight::route('GET /logout', ['AuthController', 'logout']);
 Flight::route('GET /accueil', ['AuthController', 'showAccueil']);
+
+Flight::route('GET /vente', ['VenteController', 'index']);
+Flight::route('POST /vente/vendre', ['VenteController', 'vendre']);
 
 Flight::route('GET /insertBesoins', ['BesoinController', 'showInsert']);
 Flight::route('POST /insertBesoins', ['BesoinController', 'postInsert']);

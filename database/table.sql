@@ -119,8 +119,8 @@ CREATE OR REPLACE TABLE comission (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idProduit INT NOT NULL,
     pourcentage DECIMAL(10, 2) NOT NULL,
-    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
-    FOREIGN KEY (idProduit) REFERENCES produits(id)
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idProduit) REFERENCES produit(idproduit)
 );
 
 CREATE OR REPLACE TABLE vente (
@@ -128,8 +128,8 @@ CREATE OR REPLACE TABLE vente (
     idProduit INT NOT NULL,
     quantite INT NOT NULL,
     prix_unitaire DECIMAL(10, 2) NOT NULL,
-    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
-    FOREIGN KEY (idProduit) REFERENCES produits(id)
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idProduit) REFERENCES produit(idproduit)
 );
 
 INSERT INTO comission (idProduit, pourcentage) VALUES 

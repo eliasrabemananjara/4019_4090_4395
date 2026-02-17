@@ -33,6 +33,9 @@ function is_active($path)
         <a href="/listesbesoins" class="sidebar-link <?= is_active('/listesbesoins') ?>">
             <i class="bi bi-list-check"></i> Liste & Attribution
         </a>
+        <a href="/vente" class="sidebar-link <?= is_active('/vente') ?>">
+            <i class="bi bi-cart4"></i> Vente de Stock
+        </a>
         <a href="/historiqueAchat" class="sidebar-link <?= is_active('/historiqueAchat') ?>">
             <i class="bi bi-cart-check"></i> Historique Achats
         </a>
