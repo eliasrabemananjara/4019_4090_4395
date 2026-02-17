@@ -115,3 +115,25 @@ CREATE TABLE achat (
     FOREIGN KEY (idville) REFERENCES ville(idville)
 );
 
+CREATE OR REPLACE TABLE comission (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idProduit INT NOT NULL,
+    pourcentage DECIMAL(10, 2) NOT NULL,
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (idProduit) REFERENCES produits(id)
+);
+
+CREATE OR REPLACE TABLE vente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idProduit INT NOT NULL,
+    quantite INT NOT NULL,
+    prix_unitaire DECIMAL(10, 2) NOT NULL,
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (idProduit) REFERENCES produits(id)
+);
+
+INSERT INTO comission (idProduit, pourcentage) VALUES 
+(1, 10),
+(2, 10),
+(3, 10),
+(4, 10);
