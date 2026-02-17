@@ -25,3 +25,12 @@ INSERT INTO prix_unitaires (idproduit, valeur) VALUES
 (2, 500),
 (3, 300),
 (4, 100);
+
+INSERT INTO comission (idProduit, pourcentage) VALUES 
+(1, 10),
+(2, 10),
+(3, 10),
+(4, 10);
+
+INSERT INTO besoin (quantite, idproduit, id_ville) VALUES 
+                                        (3000, 5, 1);

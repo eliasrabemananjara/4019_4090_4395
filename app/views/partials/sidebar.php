@@ -39,6 +39,9 @@ function is_active($path)
         <a href="/recapitulatif" class="sidebar-link <?= is_active('/recapitulatif') ?>">
             <i class="bi bi-bar-chart-fill"></i> Récapitulatif
         </a>
+        <a href="/reinitialiser" class="sidebar-link <?= is_active('/reinitialiser') ?>">
+            <i class="bi bi-arrow-repeat"></i> Réinitialiser Données
+        </a>
 
         <div class="sidebar-divider"></div>
 
