@@ -35,3 +35,4 @@ Flight::route('GET /recapitulatif', ['RecapitControleur', 'showRecap']);
 Flight::route('POST /acheter', ['ListeBesoinController', 'acheter']);
 Flight::route('GET /historiqueAchat', ['HistoriqueAchatController', 'index']);
 Flight::route('GET /api/recap', ['RecapitControleur', 'getGlobalStats']);
+Flight::route('GET /reinitialiser', ['ReinitialiserController', 'reinitialiser']);

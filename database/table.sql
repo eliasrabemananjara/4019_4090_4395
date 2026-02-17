@@ -71,40 +71,12 @@ CREATE TABLE attribution (
     FOREIGN KEY (id_ville) REFERENCES ville(idville)
 );
 
-INSERT INTO region (nom_region) VALUES 
-('Analamanga'),
-('Vakinankaratra');
-
-INSERT INTO ville (nom_ville, idregion) VALUES 
-('Antananarivo', 1),
-('Manjakandriana', 1),
-('Antsirabe', 2),
-('Betafo', 2);
-
-INSERT INTO type_produit (nom_type_produit) VALUES 
-('Nature'),
-('Materiaux'),
-('Argent');
-
-INSERT INTO produit (nom_produit, idtype_produit) VALUES 
-('Riz', 1),
-('Huile', 1),
-('Tole', 2),
-('Clou', 2),
-('Argent', 3);
-
 CREATE TABLE prix_unitaires (
     idprix_unitaires INT PRIMARY KEY AUTO_INCREMENT,
     idproduit INT NOT NULL,
     valeur INT NOT NULL,
     FOREIGN KEY (idproduit) REFERENCES produit(idproduit)
 );
-
-INSERT INTO prix_unitaires (idproduit, valeur) VALUES 
-(1, 1000),
-(2, 500),
-(3, 300),
-(4, 100);
 
 CREATE TABLE achat (
     idachat INT PRIMARY KEY AUTO_INCREMENT,
@@ -114,4 +86,6 @@ CREATE TABLE achat (
     FOREIGN KEY (idproduit) REFERENCES produit(idproduit),
     FOREIGN KEY (idville) REFERENCES ville(idville)
 );
+
+
 
