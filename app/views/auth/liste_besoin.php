@@ -19,15 +19,26 @@
 
 <body>
     <!-- Navbar -->
+    <!-- Sidebar -->
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/../app/views/partials/sidebar.php'; ?>
+
     <header class="app-header">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="/accueil" class="app-brand">
-                <i class="bi bi-heart-pulse-fill"></i> SOS Cyclone
-            </a>
+
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle" title="Menu">
+                    <i class="bi bi-list"></i>
+                </button>
+                <a href="/accueil" class="app-brand" style="margin:0; font-size: 1.25rem;">
+                    SOS Cyclone
+                </a>
+            </div>
+
             <nav class="nav-menu">
-                <a href="/accueil" class="nav-link">Accueil</a>
-                <a href="/listesbesoins" class="nav-link active">Besoins</a>
-                <a href="/logout" class="nav-link text-danger">Déconnexion</a>
+                <span class="nav-link active" style="cursor: default;">Liste & Attribution</span>
+                <a href="/logout" class="btn btn-outline btn-sm text-danger ms-3" style="border-color: var(--color-error); color: var(--color-error);">
+                    <i class="bi bi-box-arrow-right"></i> Déconnexion
+                </a>
             </nav>
         </div>
     </header>
@@ -40,9 +51,6 @@
                 <p class="text-muted mb-0">Gestion, attribution et achats</p>
             </div>
             <div class="d-flex gap-2">
-                <a href="/historiqueAchat" class="btn btn-outline">
-                    <i class="bi bi-clock-history"></i> Historique
-                </a>
                 <a href="/insertBesoins" class="btn btn-primary">
                     <i class="bi bi-plus-lg"></i> Nouveau Besoin
                 </a>
@@ -165,6 +173,13 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
+
+    <footer class="app-footer">
+        <div class="container text-center">
+            <p class="footer-numbers">4019-4090-4395</p>
+            <p class="footer-copyright">&copy; 2026 SOS Cyclone. Tous droits réservés.</p>
+        </div>
+    </footer>
 
 </body>
 

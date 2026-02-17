@@ -3,6 +3,8 @@
 /* Fullscreen Background & Layout using Flexbox for centering */
 .login-page {
     display: flex;
+    flex-direction: column;
+    /* Ensure vertical stacking */
     justify-content: center;
     /* Horizontal Center */
     align-items: center;
@@ -59,18 +61,18 @@
 
 /* Glassmorphism Card Effect */
 .login-box .card {
-    background: rgba(250, 248, 245, 0.92);
-    /* Semi-transparent warm white */
-    backdrop-filter: blur(16px);
-    /* Blur effect */
-    -webkit-backdrop-filter: blur(16px);
-    /* Safari support */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    /* Subtle border */
-    box-shadow: 0 12px 40px 0 rgba(58, 51, 48, 0.2);
-    /* Warm shadow */
+    /* Use a more transparent white for true glass effect */
+    background: rgba(255, 255, 255, 0.15);
+    /* Stronger blur for better depth */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Light border for the glass edge look */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    /* Soft shadow to separate from background */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     border-radius: var(--border-radius-xl);
-    /* More rounded for modern feel */
 }
 
 .login-card-body {
@@ -81,26 +83,52 @@
 .login-box-msg {
     text-align: center;
     margin-bottom: var(--space-6);
-    color: var(--color-secondary-dark);
+    /* Ensure text is readable on the glass background (likely needs to be white or very dark depending on bg) */
+    /* Assuming a potentially dark background image, let's use white text with a shadow or keep it dark if the glass is white enough. */
+    /* Since we used rgba(255,255,255, 0.15), it is quite dark. Let's make text white for better contrast if the background is dark. */
+    color: #ffffff;
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-lg);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login-box .form-label {
+    color: #ffffff;
+    font-weight: 500;
 }
 
 /* Adjusting inputs for glassmorphism context */
 .login-box .form-control {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(0, 0, 0, 0.1);
+    /* More transparent inputs */
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    /* White text input */
+    border-radius: var(--border-radius-md);
+}
+
+/* Placeholder color */
+.login-box .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .login-box .form-control:focus {
-    background-color: #fff;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px rgba(45, 106, 95, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .login-box .input-group-text {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: none;
+    /* If input group text is on right? or left? Bootstrap defaults. */
+    color: #fff;
+}
+
+.login-box .form-check-label {
+    color: #ffffff;
 }
 
 /* Social buttons refinement */
@@ -111,11 +139,63 @@
     margin-bottom: var(--space-2);
 }
 
+/* Override outline buttons in this context to be visible on glass */
+.social-auth-links .btn-outline {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    /* Very subtle fill */
+}
+
+.social-auth-links .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    color: white;
+}
+
 /* Links */
 .login-box a {
-    color: var(--color-primary-dark);
+    color: rgba(255, 255, 255, 0.9);
+    /* High contrast link */
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .login-box a:hover {
-    color: var(--color-primary);
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Specific fix for the Google button inline style if needed, 
+   but since it has inline styles, we might need !important or just let it be if it pops enough. 
+   Actually, let's override it to be white for consistency or keep it brand colored but readable.
+   The inline style is: style="color: #db4437; border-color: #db4437;"
+   If the background is dark, red is hard to see. 
+   Let's force it to be lighter or white with a red icon.
+*/
+.social-auth-links .btn-outline[style*="color: #db4437"] {
+    color: #ffcccc !important;
+    border-color: #ffcccc !important;
+}
+
+/* --- Login Footer Specifics --- */
+.login-page .app-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+    border-top: none;
+    margin-top: 0;
+    padding-bottom: var(--space-4);
+    z-index: 2;
+    /* Content layer*/
+}
+
+.login-page .footer-numbers {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.login-page .footer-copyright {
+    color: rgba(255, 255, 255, 0.7);
 }

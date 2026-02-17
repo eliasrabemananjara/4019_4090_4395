@@ -16,6 +16,117 @@
     color: var(--color-primary);
 }
 
+/* Sidebar Styles */
+.sidebar-toggle {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--border-radius-md);
+    transition: background-color 0.2s;
+    margin-right: var(--space-4);
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--color-bg-body);
+}
+
+
+
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    /* Hidden by default */
+    width: 250px;
+    height: 100vh;
+    background-color: var(--color-background);
+    z-index: 1100;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    background: var(--color-bg-card);
+    border-right: 1px solid var(--color-border);
+}
+
+.sidebar-menu.open {
+    left: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1090;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.sidebar-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-4);
+}
+
+.sidebar-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-text-main);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background-color: var(--color-primary-bg);
+    color: var(--color-primary);
+}
+
+.sidebar-link.text-danger:hover {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.btn-close-sidebar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
 /* Dashboard Grid */
 .dashboard-grid {
     display: grid;
