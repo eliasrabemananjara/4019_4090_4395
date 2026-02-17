@@ -51,16 +51,49 @@
             -[ok][4395]Inserer l'attribution
         -[ok][4395]Message succes ou erreur
 
--Gestion des Prix et Achats (Dons Argent)
-    -Ajout des prix unitaires qui ne changent pas pour les besoins (nature/materiaux)
-    -Page d'achat de besoins (Conversion Dons Argent -> Besoins)
-        -Liste des achats a faire filtrable par Ville
-        -Saisie des achats en utilisant les prix unitaires
-        -Tableau recpaitulatif des montants d'achat par ville
+-Gestion des Prix Unitaires
+    -[ok][4090]Creation table prix_unitaires
+        -[ok][4090]Champs idprix_unitaires, idproduit, valeur
+        -[ok][4090]Insertion des prix pour les produits (Nature/Materiaux)
+    -[ok][4090]Creation Prix_unitaireRepository
+        -[ok][4090]Methode getLatestByProduit() pour recuperer le prix d'un produit
+
+-Gestion des Achats (Conversion Dons Argent -> Besoins)
+    -[ok][4019]Creation table achat
+        -[ok][4019]Champs idachat, montant, idproduit, idville
+    -[ok][4019]Creation AchatRepository
+        -[ok][4019]Methode findAll() pour lister tous les achats
+        -[ok][4019]Methode create() pour enregistrer un achat
+    -[ok][4019]Creation page historiqueAchat.php
+        -[ok][4019]Affichage de la liste des achats
+        -[ok][4019]Tableau avec colonnes: Ville, Produit, Montant
+        -[ok][4019]Filtrage possible par ville
+    -[ok][4019]Creation HistoriqueAchatController
+        -[ok][4019]Methode index() pour afficher l'historique
 
 -Recapitulation Financiere (Tableau de Bord Global)
-    -Creation page de recapitulation avec bouton "Actualiser" (Ajax)
-        -Affichage Montant Total des Besoins
-        -Affichage Montant Total des Besoins Satisfaits
-        -Affichage Montant Total des Dons Recus
-        -Affichage Montant Total des Dons Dispatches
+    -[ok][4395]Creation page recapitulation.php
+        -[ok][4395]Tableau recapitulatif par ville
+            -[ok][4395]Colonne Ville
+            -[ok][4395]Colonne Besoins (en Ariary)
+            -[ok][4395]Colonne Dons Attribues (en Ariary)
+            -[ok][4395]Colonne Reste (en Ariary)
+        -[ok][4395]Section statistiques globales (Ajax)
+            -[ok][4395]Montant Total des Besoins
+            -[ok][4395]Montant Total des Besoins Satisfaits
+            -[ok][4395]Montant Total des Dons Recus
+            -[ok][4395]Montant Total des Dons Dispatches
+        -[ok][4395]Bouton "Actualiser" pour mise a jour Ajax
+    -[ok][4395]Creation RecapitControleur
+        -[ok][4395]Methode showRecap() pour afficher la page
+        -[ok][4395]Methode getGlobalStats() pour retourner les stats en JSON
+    -[ok][4395]Calcul automatique des montants en Ariary
+        -[ok][4395]Conversion produits Nature/Materiaux via prix_unitaires
+        -[ok][4395]Traitement direct pour l'Argent (idproduit=5)
+
+-Amelioration du Design (UX/UI)
+    -[ok][4090]Systeme de design centralise (6 fichiers CSS)
+    -[ok][4090]Palette de couleurs douce (beige/creme, vert sauge, terracotta)
+    -[ok][4090]Page de connexion avec glassmorphism et background image
+    -[ok][4090]Effets visuels (animations, hover, scrollbar personnalisee)
+

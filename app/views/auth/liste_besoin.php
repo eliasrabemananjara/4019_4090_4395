@@ -4,377 +4,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Besoins</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f5f5f5;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
+    <title>Liste des Besoins | SOS Cyclone</title>
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .header p {
-            margin: 10px 0 0 0;
-            opacity: 0.9;
-        }
-
-        .ville-section {
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .ville-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ville-name {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .ville-stats {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-        }
-
-        .stat {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .stat-badge {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-
-        .besoins-list {
-            padding: 0;
-        }
-
-        .besoin-item {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 2fr;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .besoin-item:last-child {
-            border-bottom: none;
-        }
-
-        .besoin-item:hover {
-            background-color: #f9f9f9;
-        }
-
-        .besoin-produit {
-            font-weight: bold;
-            color: #333;
-            font-size: 16px;
-        }
-
-        .besoin-quantity {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .quantity-label {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .quantity-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .attribuee {
-            color: #28a745;
-        }
-
-        .reste {
-            color: #dc3545;
-        }
-
-        .stock {
-            color: #17a2b8;
-        }
-
-        .empty-message {
-            padding: 30px;
-            text-align: center;
-            color: #999;
-            font-style: italic;
-        }
-
-        .progress-section {
-            padding: 20px;
-            background: #f8f9fa;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .progress-item {
-            text-align: center;
-        }
-
-        .progress-label {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .progress-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .progress-bar-container {
-            background: #e9ecef;
-            border-radius: 20px;
-            height: 8px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            height: 100%;
-            border-radius: 20px;
-        }
-
-        .back-link {
-            margin-bottom: 20px;
-        }
-
-        .back-link a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .back-link a:hover {
-            color: #764ba2;
-            gap: 12px;
-        }
-
-        .besoin-grid-header {
-            padding: 15px 20px;
-            background: #f8f9fa;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 15px;
-            font-weight: bold;
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        @media (max-width: 992px) {
-
-            .besoin-item,
-            .besoin-grid-header {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .progress-section {
-                grid-template-columns: 1fr;
-            }
-
-            .ville-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-
-        @media (max-width: 576px) {
-
-            .besoin-item,
-            .besoin-grid-header {
-                grid-template-columns: 1fr;
-            }
-
-            .ville-header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .header h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    <!-- CSS System -->
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/pages/main.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="back-link">
-            <a href="/accueil">← Retour à l'accueil</a>
+    <!-- Navbar -->
+    <header class="app-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/accueil" class="app-brand">
+                <i class="bi bi-heart-pulse-fill"></i> SOS Cyclone
+            </a>
+            <nav class="nav-menu">
+                <a href="/accueil" class="nav-link">Accueil</a>
+                <a href="/listesbesoins" class="nav-link active">Besoins</a>
+                <a href="/logout" class="nav-link text-danger">Déconnexion</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="header">
-            <h1>📋 Liste des Besoins par Ville</h1>
-            <p>Vue d'ensemble des besoins, attributions et stock disponible</p>
+    <main class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="mb-1">Besoins par Ville</h1>
+                <p class="text-muted mb-0">Gestion, attribution et achats</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/historiqueAchat" class="btn btn-outline">
+                    <i class="bi bi-clock-history"></i> Historique
+                </a>
+                <a href="/insertBesoins" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i> Nouveau Besoin
+                </a>
+            </div>
         </div>
 
         <?php if (!empty($success)): ?>
             <div class="alert alert-success">
-                <?php echo htmlspecialchars($success); ?>
+                <i class="bi bi-check-circle-fill me-2"></i> <?php echo htmlspecialchars($success); ?>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger">
-                <?php echo htmlspecialchars($error); ?>
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
 
         <?php if (empty($donnees)): ?>
-            <div class="ville-section">
-                <div class="empty-message">
-                    Aucune ville disponible pour le moment.
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-geo-alt text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-3">Aucune ville n'a encore signalé de besoins.</p>
                 </div>
             </div>
         <?php else: ?>
             <?php foreach ($donnees as $section): ?>
-                <div class="ville-section">
-                    <div class="ville-header">
-                        <div class="ville-name">
-                            📍 <?php echo htmlspecialchars($section['ville']['nom_ville']); ?>
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center bg-light-primary">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-geo-alt-fill text-primary"></i>
+                            <h2 class="h5 mb-0 text-primary-dark"><?php echo htmlspecialchars($section['ville']['nom_ville']); ?></h2>
                         </div>
-                        <div class="ville-stats">
-                            <div class="stat">
-                                <span>Demandé:</span>
-                                <span class="stat-badge"><?php echo $section['total_demande']; ?> unités</span>
-                            </div>
-                            <div class="stat">
-                                <span>Attribué:</span>
-                                <span class="stat-badge"><?php echo $section['total_attribue']; ?> unités</span>
-                            </div>
-                        </div>
+                        <!-- <div class="d-flex gap-3 text-sm">
+                            <span class="badge bg-secondary">Total: <?php echo $section['total_demande']; ?></span>
+                            <span class="badge bg-success">Attribué: <?php echo $section['total_attribue']; ?></span>
+                        </div> -->
                     </div>
 
-                    <?php if (empty($section['besoins'])): ?>
-                        <div class="empty-message">
-                            Aucun besoin enregistré pour cette ville.
-                        </div>
-                    <?php else: ?>
-                        <div class="besoins-list">
-                            <div class="besoin-grid-header">
-                                <div>Produit</div>
-                                <div>Stock Dispo</div>
-                                <div>Demandée</div>
-                                <div>Attribuée</div>
-                                <div>Reste</div>
-                                <div>Attribution</div>
-                                <div>Achat</div>
+                    <div class="card-body p-0">
+                        <?php if (empty($section['besoins'])): ?>
+                            <div class="p-4 text-center text-muted">
+                                Aucun besoin spécifique enregistré.
                             </div>
+                        <?php else: ?>
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th class="text-center">Stock</th>
+                                        <th class="text-center">Demande</th>
+                                        <th class="text-center">Attribué</th>
+                                        <th class="text-center">Reste</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($section['besoins'] as $besoin): ?>
+                                        <tr>
+                                            <td class="fw-bold">
+                                                <?php echo htmlspecialchars($besoin['nom_produit']); ?>
+                                            </td>
+                                            <td class="text-center text-muted">
+                                                <?php echo $besoin['stock_disponible']; ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php echo $besoin['quantite']; ?>
+                                            </td>
+                                            <td class="text-center text-success">
+                                                <?php echo $besoin['quantite_attribuee']; ?>
+                                            </td>
+                                            <td class="text-center text-danger fw-bold">
+                                                <?php echo $besoin['reste']; ?>
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="d-flex align-items-center justify-content-end gap-2">
 
-                            <?php foreach ($section['besoins'] as $besoin): ?>
-                                <div class="besoin-item">
-                                    <div class="besoin-produit">
-                                        🔹 <?php echo htmlspecialchars($besoin['nom_produit']); ?>
-                                    </div>
+                                                    <!-- Actions Logic -->
+                                                    <?php if ($besoin['reste'] <= 0): ?>
+                                                        <span class="badge bg-success"><i class="bi bi-check-lg"></i> Complet</span>
+                                                    <?php else: ?>
 
-                                    <div class="besoin-quantity">
-                                        <span class="quantity-label">Stock</span>
-                                        <span class="quantity-value stock"><?php echo $besoin['stock_disponible']; ?></span>
-                                    </div>
+                                                        <!-- Attribuer Form -->
+                                                        <?php if ($besoin['stock_disponible'] > 0): ?>
+                                                            <form action="/attribuer" method="POST" class="d-flex gap-1">
+                                                                <input type="hidden" name="id_ville" value="<?php echo $section['ville']['idville']; ?>">
+                                                                <input type="hidden" name="idproduit" value="<?php echo $besoin['idproduit']; ?>">
+                                                                <input type="number" name="quantite" class="form-control" style="width: 70px; padding: 4px 8px; font-size: 0.9em;" placeholder="Qté" min="1" max="<?php echo min($besoin['reste'], $besoin['stock_disponible']); ?>" required>
+                                                                <button type="submit" class="btn btn-primary btn-sm" title="Attribuer">
+                                                                    <i class="bi bi-box-seam"></i> Attribuer
+                                                                </button>
+                                                            </form>
+                                                        <?php else: ?>
+                                                            <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-triangle"></i> Stock vide</span>
+                                                        <?php endif; ?>
 
-                                    <div class="besoin-quantity">
-                                        <span class="quantity-label">Demandée</span>
-                                        <span class="quantity-value"><?php echo $besoin['quantite']; ?></span>
-                                    </div>
+                                                        <!-- Acheter Form -->
+                                                        <?php if ($besoin['idproduit'] != 5): // Special condition kept from original 
+                                                        ?>
+                                                            <form action="/acheter" method="POST" class="d-flex gap-1 ms-2" style="border-left: 1px solid #eee; padding-left: 8px;">
+                                                                <input type="hidden" name="id_ville" value="<?php echo $section['ville']['idville']; ?>">
+                                                                <input type="hidden" name="idproduit" value="<?php echo $besoin['idproduit']; ?>">
+                                                                <input type="number" name="quantite" class="form-control" style="width: 70px; padding: 4px 8px; font-size: 0.9em;" placeholder="Qté" required>
+                                                                <button type="submit" class="btn btn-accent btn-sm" title="Acheter">
+                                                                    <i class="bi bi-cart"></i> Acheter
+                                                                </button>
+                                                            </form>
+                                                        <?php endif; ?>
 
-                                    <div class="besoin-quantity">
-                                        <span class="quantity-label">Attribuée</span>
-                                        <span class="quantity-value attribuee"><?php echo $besoin['quantite_attribuee']; ?></span>
-                                    </div>
-
-                                    <div class="besoin-quantity">
-                                        <span class="quantity-label">Reste</span>
-                                        <span class="quantity-value reste"><?php echo $besoin['reste']; ?></span>
-                                    </div>
-
-                                    <div class="besoin-action">
-                                        <?php if ($besoin['reste'] <= 0): ?>
-                                            <span class="badge bg-success">Complet</span>
-                                        <?php elseif ($besoin['stock_disponible'] <= 0): ?>
-                                            <span class="badge bg-danger">Rupture de stock</span>
-                                        <?php else: ?>
-                                            <form action="/attribuer" method="POST" class="d-flex gap-2">
-                                                <input type="hidden" name="id_ville" value="<?php echo $section['ville']['idville']; ?>">
-                                                <input type="hidden" name="idproduit" value="<?php echo $besoin['idproduit']; ?>">
-                                                <input type="number" name="quantite" class="form-control form-control-sm" placeholder="Qté" min="1" max="<?php echo min($besoin['reste'], $besoin['stock_disponible']); ?>" style="width: 80px;" required>
-                                                <button type="submit" class="btn btn-sm btn-primary">Attribuer</button>
-                                            </form>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="besoin-action">
-                                        <form action="/acheter" method="POST" class="d-flex gap-2">
-                                            <input type="hidden" name="id_ville" value="<?php echo $section['ville']['idville']; ?>">
-                                            <input type="hidden" name="idproduit" value="<?php echo $besoin['idproduit']; ?>">
-                                            <input type="number" name="quantite" class="form-control form-control-sm" placeholder="Qté" style="width: 80px;" required>
-                                            <button type="submit" class="btn btn-sm btn-primary">Acheter</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-
-
-                    <?php endif; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
-    </div>
+    </main>
+
 </body>
 
 </html>

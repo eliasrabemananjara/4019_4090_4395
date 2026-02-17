@@ -1,0 +1,121 @@
+/* Login / Auth Page Specific Styles */
+
+/* Fullscreen Background & Layout using Flexbox for centering */
+.login-page {
+    display: flex;
+    justify-content: center;
+    /* Horizontal Center */
+    align-items: center;
+    /* Vertical Center */
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+
+    /* Background Image Setup - Absolute path is safest given server root is public */
+    background-image: url('/img/cyclone.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Warm overlay to ensure contrast and focus */
+.login-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(45, 106, 95, 0.3), rgba(107, 91, 79, 0.4));
+    /* Warm overlay with gradient */
+    z-index: 1;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    /* Restrict width */
+    margin: var(--space-4);
+    position: relative;
+    z-index: 2;
+    /* Place above overlay */
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.login-logo a {
+    color: white;
+    /* White text for logo on dark/image bg */
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Shadow for readability */
+    text-decoration: none;
+}
+
+/* Glassmorphism Card Effect */
+.login-box .card {
+    background: rgba(250, 248, 245, 0.92);
+    /* Semi-transparent warm white */
+    backdrop-filter: blur(16px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(16px);
+    /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Subtle border */
+    box-shadow: 0 12px 40px 0 rgba(58, 51, 48, 0.2);
+    /* Warm shadow */
+    border-radius: var(--border-radius-xl);
+    /* More rounded for modern feel */
+}
+
+.login-card-body {
+    padding: var(--space-8) var(--space-6);
+    /* Spacious padding */
+}
+
+.login-box-msg {
+    text-align: center;
+    margin-bottom: var(--space-6);
+    color: var(--color-secondary-dark);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-lg);
+}
+
+/* Adjusting inputs for glassmorphism context */
+.login-box .form-control {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.login-box .form-control:focus {
+    background-color: #fff;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(45, 106, 95, 0.2);
+}
+
+.login-box .input-group-text {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Social buttons refinement */
+.social-auth-links .btn {
+    width: 100%;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-2);
+}
+
+/* Links */
+.login-box a {
+    color: var(--color-primary-dark);
+}
+
+.login-box a:hover {
+    color: var(--color-primary);
+}

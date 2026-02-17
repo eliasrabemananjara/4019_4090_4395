@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../repositories/Prix_unitaireRepository.php';
+require_once __DIR__ . '/../repositories/AchatRepository.php';
 
 class ListeBesoinController
 {
@@ -157,6 +158,7 @@ class ListeBesoinController
         $stockRepo = new StockRepository($pdo);
         $attributionRepo = new AttributionRepository($pdo);
         $prixRepo = new Prix_unitaireRepository($pdo);
+        $achatRepo = new AchatRepository($pdo);
 
         $prixUnitaire = 0;
         $prixs = $prixRepo->getAllPrixUnitaires();
@@ -175,14 +177,25 @@ class ListeBesoinController
 
         $montantTotal = $quantite * $prixUnitaire;
 
+        // Vérifier si la ville a assez d'argent (Produit ID 5 = Argent)
+        $soldeArgent = $attributionRepo->getSoldeByProduitAndVille(5, $id_ville);
+
+        if ($soldeArgent < $montantTotal) {
+            $_SESSION['error'] = "Solde insuffisant pour la ville. Disponible: $soldeArgent Ar, Requis: $montantTotal Ar.";
+            Flight::redirect('/listesbesoins');
+            return;
+        }
 
         try {
             $pdo->beginTransaction();
-            
+
 
             $attributionRepo->removeAttribution($montantTotal, 5, $id_ville);
 
             $attributionRepo->create($quantite, $idproduit, $id_ville);
+
+            // Enregistrer l'achat dans l'historique
+            $achatRepo->create($montantTotal, $idproduit, $id_ville);
 
             $pdo->commit();
             $_SESSION['success'] = "Achat de $quantite unités effectué avec succès pour un montant de $montantTotal.";

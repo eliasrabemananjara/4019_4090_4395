@@ -16,10 +16,12 @@ require_once __DIR__ . '/repositories/StockRepository.php';
 require_once __DIR__ . '/repositories/AttributionRepository.php';
 require_once __DIR__ . '/repositories/PrixUnitaireRepository.php';
 require_once __DIR__ . '/controllers/recapitControleur.php';
+require_once __DIR__ . '/controllers/HistoriqueAchatController.php';
 
 Flight::route('GET /', ['AuthController', 'showLogin']);
 Flight::route('GET /login', ['AuthController', 'showLogin']);
 Flight::route('POST /login', ['AuthController', 'postLogin']);
+Flight::route('GET /logout', ['AuthController', 'logout']);
 Flight::route('GET /accueil', ['AuthController', 'showAccueil']);
 
 Flight::route('GET /insertBesoins', ['BesoinController', 'showInsert']);
@@ -31,3 +33,5 @@ Flight::route('GET /listesbesoins', ['ListeBesoinController', 'listeBesoin']);
 Flight::route('POST /attribuer', ['ListeBesoinController', 'attribuer']);
 Flight::route('GET /recapitulatif', ['RecapitControleur', 'showRecap']);
 Flight::route('POST /acheter', ['ListeBesoinController', 'acheter']);
+Flight::route('GET /historiqueAchat', ['HistoriqueAchatController', 'index']);
+Flight::route('GET /api/recap', ['RecapitControleur', 'getGlobalStats']);

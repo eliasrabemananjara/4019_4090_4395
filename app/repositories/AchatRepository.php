@@ -83,4 +83,14 @@ class AchatRepository
         $result = $st->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+
+    public function getTotalsGroupByVille()
+    {
+        $st = $this->pdo->query("SELECT v.nom_ville, SUM(a.montant) as total_achat 
+                                 FROM achat a 
+                                 JOIN ville v ON a.idville = v.idville 
+                                 GROUP BY a.idville, v.nom_ville
+                                 ORDER BY total_achat DESC");
+        return $st->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

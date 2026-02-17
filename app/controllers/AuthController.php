@@ -60,4 +60,13 @@ class AuthController
   {
     Flight::render('auth/accueil');
   }
+
+  public static function logout()
+  {
+    if (session_status() === PHP_SESSION_NONE) {
+      session_start();
+    }
+    session_destroy();
+    Flight::redirect('/login');
+  }
 }

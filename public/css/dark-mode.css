@@ -1,0 +1,116 @@
+/* Dark Mode Theme - Optional */
+/* Add class 'dark-mode' to body to activate */
+
+.dark-mode {
+    /* Override color variables for dark mode */
+    --color-bg-body: #2a2520;
+    --color-bg-card: #352f2a;
+    --color-text-main: #e8e3de;
+    --color-text-muted: #a8a09a;
+    --color-border: #4a443f;
+
+    /* Adjust primary colors for better contrast in dark mode */
+    --color-primary: #4a9080;
+    --color-primary-light: #6ab09f;
+    --color-primary-bg: #2d4a43;
+
+    /* Adjust shadows for dark mode */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 4px 8px -3px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode specific adjustments */
+.dark-mode .form-control {
+    background-color: #2a2520;
+    color: var(--color-text-main);
+    border-color: var(--color-border);
+}
+
+.dark-mode .form-control:focus {
+    background-color: #352f2a;
+}
+
+.dark-mode .table {
+    background: var(--color-bg-card);
+}
+
+.dark-mode .table th {
+    background-color: rgba(74, 144, 128, 0.1);
+}
+
+.dark-mode .app-header {
+    background-color: var(--color-bg-card);
+    border-bottom-color: var(--color-border);
+}
+
+.dark-mode .input-group-text {
+    background-color: #2a2520;
+    color: var(--color-text-muted);
+}
+
+.dark-mode .card {
+    border-color: var(--color-border);
+}
+
+.dark-mode .alert-danger {
+    background-color: #3d2828;
+    color: #e8a8a8;
+    border-color: #5a3838;
+}
+
+.dark-mode .alert-success {
+    background-color: #2a3d2f;
+    color: #a8d8b8;
+    border-color: #3a5a44;
+}
+
+/* Dark mode login page adjustments */
+.dark-mode.login-page::before {
+    background: linear-gradient(135deg, rgba(45, 106, 95, 0.5), rgba(107, 91, 79, 0.6));
+}
+
+.dark-mode .login-box .card {
+    background: rgba(53, 47, 42, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .login-box .form-control {
+    background-color: rgba(42, 37, 32, 0.9);
+    color: var(--color-text-main);
+}
+
+.dark-mode .login-box .input-group-text {
+    background-color: rgba(42, 37, 32, 0.7);
+}
+
+/* Scrollbar for dark mode */
+.dark-mode::-webkit-scrollbar-track {
+    background: var(--color-bg-body);
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+}
+
+.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
+
+/* Dark mode selection */
+.dark-mode ::selection {
+    background-color: rgba(74, 144, 128, 0.3);
+    color: var(--color-text-main);
+}
+
+.dark-mode ::-moz-selection {
+    background-color: rgba(74, 144, 128, 0.3);
+    color: var(--color-text-main);
+}
+
+/* Dark mode pattern overlay */
+.dark-mode::before {
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(74, 144, 128, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(107, 91, 79, 0.05) 0%, transparent 50%);
+}

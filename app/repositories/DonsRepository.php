@@ -81,4 +81,10 @@ class DonsRepository
         $result = $st->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+
+    public function getAllTotals()
+    {
+        $st = $this->pdo->query("SELECT idproduit, SUM(quantite) as total FROM dons GROUP BY idproduit");
+        return $st->fetchAll(PDO::FETCH_KEY_PAIR);
+    }
 }

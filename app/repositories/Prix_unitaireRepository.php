@@ -39,4 +39,12 @@ class Prix_unitaireRepository
         $st = $this->pdo->prepare("DELETE FROM prix_unitaires WHERE idprix_unitaires = ?");
         return $st->execute([(int)$id]);
     }
+
+    public function getLatestByProduit($idproduit)
+    {
+        $st = $this->pdo->prepare("SELECT valeur FROM prix_unitaires WHERE idproduit = ? ORDER BY idprix_unitaires DESC LIMIT 1");
+        $st->execute([(int)$idproduit]);
+        $result = $st->fetch(\PDO::FETCH_ASSOC);
+        return $result['valeur'] ?? 0;
+    }
 }

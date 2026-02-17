@@ -100,4 +100,12 @@ class AttributionRepository
     {
         return $this->create(-$quantite, $idproduit, $id_ville);
     }
+
+    public function getSoldeByProduitAndVille($idproduit, $id_ville)
+    {
+        $st = $this->pdo->prepare("SELECT SUM(quantite) as total FROM attribution WHERE idproduit = ? AND id_ville = ?");
+        $st->execute([(int)$idproduit, (int)$id_ville]);
+        $result = $st->fetch(PDO::FETCH_ASSOC);
+        return (int)($result['total'] ?? 0);
+    }
 }
