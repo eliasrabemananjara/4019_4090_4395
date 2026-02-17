@@ -93,6 +93,14 @@ function cls_invalid($errors, $field)
   </div>
   <!-- /.login-box -->
 
+
+  <footer class="app-footer">
+    <div class="container text-center">
+      <p class="footer-numbers">4019-4090-4395</p>
+      <p class="footer-copyright">&copy; 2026 SOS Cyclone. Tous droits réservés.</p>
+    </div>
+  </footer>
+
 </body>
 
 </html>
