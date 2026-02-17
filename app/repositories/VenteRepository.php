@@ -151,4 +151,11 @@ class VenteRepository
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
         return $res ? $res['idproduit'] : null;
     }
+
+    public function updateGlobalCommission($pourcentage)
+    {
+        $sql = "UPDATE comission SET pourcentage = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$pourcentage]);
+    }
 }

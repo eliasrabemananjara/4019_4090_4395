@@ -29,6 +29,7 @@ Flight::route('GET /accueil', ['AuthController', 'showAccueil']);
 
 Flight::route('GET /vente', ['VenteController', 'index']);
 Flight::route('POST /vente/vendre', ['VenteController', 'vendre']);
+Flight::route('POST /vente/commission', ['VenteController', 'updateCommission']);
 
 Flight::route('GET /insertBesoins', ['BesoinController', 'showInsert']);
 Flight::route('POST /insertBesoins', ['BesoinController', 'postInsert']);

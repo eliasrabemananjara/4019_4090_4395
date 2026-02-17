@@ -97,3 +97,28 @@
     -[ok][4090]Page de connexion avec glassmorphism et background image
     -[ok][4090]Effets visuels (animations, hover, scrollbar personnalisee)
 
+
+-Gestion des Ventes de Stock (Produits -> Argent)
+    -[ok][4090]Création page Vente de Stock (/vente)
+        -[ok][4395]Tableau des produits disponibles (hors Argent)
+        -[ok][4090]Affichage Stock, Prix Unitaire, Commission (%)
+        -[ok][4395]Input quantité à vendre par produit
+        -[ok][4395]Bouton "Vendre" avec traitement AJAX
+    -[ok][4019]Logique métier Vente (Backend)
+        -[ok][4019]Vérification disponibilité stock (Stock insuffisant)
+        -[ok][4019]Vérification couverture besoins restants (Blocage si besoins non couverts)
+        -[ok][4395]Affichage détaillé des villes impactées en cas de blocage
+        -[ok][4019]Calcul prix final (Prix base + Commission)
+        -[ok][4019]Mise à jour atomique : Décrémenter Stock Produit / Incrémenter Stock Argent
+    -[ok][4395]Configuration Commission
+        -[ok][4395]Card "Configuration" sur page vente
+        -[ok][4019]Mise à jour globale du pourcentage de commission pour tous les produits via AJAX
+
+-Fonctionnalités Système & Maintenance
+    -[ok][4090]Réinitialisation des Données
+        -[ok][4090]Page /reinitialiser pour remettre la base à zéro (stock, besoins, dons, etc.)
+    -[ok][4090]Navigation
+        -[ok][4090]Ajout lien "Vente de Stock" dans Sidebar
+        -[ok][4090]Ajout carte "Vente de Stock" sur Dashboard Accueil
+        -[ok][4090]Ajout lien "Réinitialiser" dans Sidebar et Accueil
+

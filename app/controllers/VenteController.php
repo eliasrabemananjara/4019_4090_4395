@@ -99,4 +99,24 @@ class VenteController
             'montant_total' => $totalVente
         ]);
     }
+
+    public static function updateCommission()
+    {
+        $pdo = Flight::db();
+        $venteRepo = new VenteRepository($pdo);
+
+        $pourcentage = Flight::request()->data->pourcentage;
+
+        if (!isset($pourcentage) || !is_numeric($pourcentage) || $pourcentage < 0) {
+            Flight::json(['success' => false, 'message' => 'Pourcentage invalide.']);
+            return;
+        }
+
+        $venteRepo->updateGlobalCommission($pourcentage);
+
+        Flight::json([
+            'success' => true,
+            'message' => 'Commission mise à jour pour tous les produits.'
+        ]);
+    }
 }

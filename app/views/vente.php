@@ -53,6 +53,29 @@
                     <h1 class="h2 mb-0">Vente de Produits</h1>
                 </div>
 
+                <div class="card mb-4 border-info">
+                    <div class="card-header bg-info-subtle text-info-emphasis">
+                        <span class="text-primary-dark"><i class="bi bi-gear-fill me-2"></i>Configuration</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <label for="global-commission" class="form-label fw-bold">Pourcentage de Commission Global</label>
+                                <p class="text-muted small mb-0">Modifiez ce pourcentage pour l'appliquer immédiatement à TOUS les produits.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="number" id="global-commission" class="form-control" placeholder="Ex: 10" min="0" step="0.1">
+                                    <span class="input-group-text">%</span>
+                                    <button class="btn btn-primary" id="btn-update-commission">
+                                        <i class="bi bi-save"></i> Appliquer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header">
                         <span class="text-primary-dark"><i class="bi bi-cart-check me-2"></i>Produits Disponibles</span>
@@ -142,6 +165,46 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Update Commission Logic
+            const btnUpdateCommission = document.getElementById('btn-update-commission');
+            if (btnUpdateCommission) {
+                btnUpdateCommission.addEventListener('click', function() {
+                    const commissionInput = document.getElementById('global-commission');
+                    const pourcentage = parseFloat(commissionInput.value);
+
+                    // Reset UI
+                    document.getElementById('alert-container').innerHTML = '';
+
+                    if (isNaN(pourcentage) || pourcentage < 0) {
+                        showAlert('Veuillez saisir un pourcentage valide.', 'danger');
+                        return;
+                    }
+
+                    fetch('/vente/commission', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                pourcentage: pourcentage
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                showAlert(data.message, 'success');
+                                setTimeout(() => location.reload(), 1500); // Reload to show new commissions in table
+                            } else {
+                                showAlert(data.message, 'danger');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            showAlert('Erreur lors de la mise à jour.', 'danger');
+                        });
+                });
+            }
+
             const buttons = document.querySelectorAll('.btn-vendre');
 
             buttons.forEach(btn => {
@@ -197,12 +260,12 @@
             function showAlert(message, type) {
                 const container = document.getElementById('alert-container');
                 container.innerHTML = `
-                    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                        ${type === 'success' ? '<i class="bi bi-check-circle-fill me-2"></i>' : '<i class="bi bi-exclamation-octagon-fill me-2"></i>'}
-                        ${message}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                `;
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${type === 'success' ? '<i class="bi bi-check-circle-fill me-2"></i>' : '<i class="bi bi-exclamation-octagon-fill me-2"></i>'}
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
             }
         });
     </script>

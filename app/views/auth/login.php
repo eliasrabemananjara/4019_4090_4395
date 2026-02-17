@@ -46,7 +46,7 @@ function cls_invalid($errors, $field)
     <!-- Login Card -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Connectez-vous pour accéder à la plateforme</p>
+        <p class="login-box-msg">Connectez-vous pour accéder à la plateforme. <br>Ceci est une autologin.</p>
 
         <form action="/login" method="post">
 
