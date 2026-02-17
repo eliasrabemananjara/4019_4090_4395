@@ -102,6 +102,15 @@
                 <span class="btn btn-sm btn-outline mt-auto w-100">Accéder</span>
             </a>
 
+                        <a href="/reinitialiser" class="card stat-card" style="text-decoration: none; border-left: 4px solid var(--color-danger); background-color: #ff4557ff;">
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <i class="bi bi-arrow-repeat" style="font-size: 1.5rem; color: white;"></i>
+                                <h3 class="h5 mb-0 text-dark"><span style="color: white;">Réinitialization des données</span></h3>
+                            </div>
+                            <p class="text-muted text-sm"><span style="color: white;">Réinitialiser toutes les données de la base de données.</span></p>
+                            <span class="btn btn-sm btn-outline mt-auto w-100" style="color: white; border-color: white;">Réinitialiser</span>
+                        </a>
+
         </div>
 
     </main>
